@@ -12,8 +12,12 @@ const PLUGIN_NAME = 'gulp-imagemin';
 const defaultPlugins = ['gifsicle', 'jpegtran', 'optipng', 'svgo'];
 
 const loadPlugin = (plugin, args) => {
+	var prefix = '';
+	if (plugin == 'gifsicle') {
+		prefix = 'xy-';
+	}
 	try {
-		return require(`imagemin-${plugin}`).apply(null, args);
+		return require(`${prefix}imagemin-${plugin}`).apply(null, args);
 	} catch (err) {
 		log(`${PLUGIN_NAME}: Couldn't load default plugin "${plugin}"`);
 	}
